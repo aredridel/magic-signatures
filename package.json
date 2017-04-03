@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/aredridel/magic-signatures/issues"
   },
-  "homepage": "https://github.com/aredridel/magic-signatures#readme"
+  "homepage": "https://github.com/aredridel/magic-signatures#readme",
+  "dependencies": {
+    "ltx": "^2.7.1"
+  }
 }
