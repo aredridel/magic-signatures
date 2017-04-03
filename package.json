@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "tape test/*.js"
   },
   "repository": {
     "type": "git",
@@ -30,5 +30,8 @@
     "env": {
       "node": true
     }
+  },
+  "devDependencies": {
+    "tape": "^4.6.3"
   }
 }
