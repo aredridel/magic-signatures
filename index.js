@@ -36,5 +36,11 @@ function fromXML(doc) {
     };
 }
 
-function toXML(doc) {
+function toXML(env) {
+    const root = new ltx.Element('env', { xmlns: MAGICNS });
+    root.c('data', { type: env.data_type }).t(env.data);
+    root.c('alg').t(env.alg);
+    env.sigs.forEach(sig => root.c('sig', { key_id: sig.key_id }).t(sig.value));
+    root.c('encoding').t(env.encoding);
+    return root.toString();
 }
