@@ -46,8 +46,8 @@ tape.test('convert to XML', t => {
 	t.end();
 });
 
-tape.test('encode JSON', t => {
-	const result = magic.encode(``);
+tape.test('sign', t => {
+	const result = magic.sign(``);
 	t.ok(result);
 	t.end();
 });
@@ -78,7 +78,7 @@ tape.test('convert from XML', t => {
 	t.end();
 });
 
-tape.test('verify JSON', t => {
+tape.test('verify', t => {
 	const result = magic.verify(``);
 	t.ok(result);
 	t.end();

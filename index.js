@@ -5,13 +5,13 @@ module.exports = {
     toXML,
     fromXML,
     verify,
-    encode
+    sign
 }
 
-function verify(doc) {
+function verify(doc, key) {
 }
 
-function encode(doc) {
+function sign(data, key) {
 }
 
 function fromXML(doc) {
