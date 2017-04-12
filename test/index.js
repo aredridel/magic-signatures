@@ -61,11 +61,11 @@ tape.test('magic key to RSA', t => {
   const rsa = magic.magicToRSA(GENKEYM);
   t.ok(rsa);
   t.equal(rsa.n.toString(16), "bacd72b6ba391f24d7dc8e15a8564350a28227eced6ea255dbad4e197ed3ffe1ff14b47b462ba0e81b9fa77f1261745caf1f62b59b75df6141348f0fbb9961979b4f7ca3fb66d1eb1fd71ebb509195a71073b0b94e42b67b96ee33df637483508321aff42e1973a31e19c2591f93a1a5a21b4272ac5af535098c7ab64423aa9a4790b3adc5d39f727ffba7640fbd8f7cc3a181d9c644de6873a85ed6a75246578ceeca31764d2edb20fd9d993aa9b46bc8c5cab1a0ba1c1ce2321dfc4d0db059af242ea9c1101072d3eea2155b0363585b0b11515c419b88634844e4e7aa7477620cff248ebd9d9944f451e9ccee8348c5cb94e0c5e8566ed503437907d6fd07");
-  t.equal(rsa.e.toString(16), "10001");
+  t.equal(rsa.e.toString(16), "010001");
 
   const priv = magic.magicToRSA(TEST_PRIVATE_KEY);
   t.equal(priv.n.toString(16), "995818f1137a511053b2d9ddbe65143dbe14653770bf099d752284e73fe3bca5042baca4d6edebac2f7237c93a1629468fd2b479e50f7b685fe0f8fee42987c3");
-  t.equal(priv.e.toString(16), "10001");
+  t.equal(priv.e.toString(16), "010001");
   t.equal(priv.d.toString(16), "2e0cbfc8bde1b0b06782415d0f0d49cbd4e64913221faca28587ad43c8f2fa365776c65777c579b9bde4b811c7938337f62dd376e22472b8dcb225906fbec3f1");
 
   t.end();

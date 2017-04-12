@@ -18,7 +18,6 @@
   "homepage": "https://github.com/aredridel/magic-signatures#readme",
   "dependencies": {
     "asn1.js": "^4.9.1",
-    "bignumber": "^1.1.0",
     "ltx": "^2.7.1",
     "node-darwin-x64": "^7.4.0",
     "node-forge": "^0.7.1"

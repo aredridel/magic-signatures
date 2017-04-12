@@ -1,7 +1,6 @@
 const ltx = require('ltx');
 const forge = require('node-forge');
 const crypto = require('crypto');
-const bn = require('bignumber');
 const MAGICNS = 'http://salmon-protocol.org/ns/magic-env';
 
 module.exports = {
@@ -38,17 +37,17 @@ function verify(doc, key) {
 function magicToRSA(key) {
     const parts = key.split('.');
     if (parts[0] != 'RSA') throw new Error(`Unsupported algorithm '${parts[0]})'`);
+    const keyParts = parts.slice(1);
 
-    const rsaKey = new bn.Key();
     const modulus = b64utob(parts[1]).toString('hex');
     const exponent = b64utob(parts[2]).toString('hex');
-    if (parts[3]) {
+
+    if (keyParts.length > 2) {
 	const d = b64utob(parts[3]).toString('hex');
-	rsaKey.setPrivate(modulus, exponent, d);
+	return forge.pki.setRsaPrivateKey.apply(null, keyParts.map(e => b64utob(e).toString('hex')));
     } else {
-	rsaKey.setPublic(modulus, exponent);
+	return forge.pki.setRsaPublicKey.apply(null, keyParts.map(e => b64utob(e).toString('hex')));
     }
-    return rsaKey;
 }
 
 function sign(doc, key) {
