@@ -19,7 +19,6 @@
   "dependencies": {
     "asn1.js": "^4.9.1",
     "ltx": "^2.7.1",
-    "node-darwin-x64": "^7.4.0",
     "node-forge": "^0.7.1"
   },
   "eslintConfig": {
