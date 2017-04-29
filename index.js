@@ -90,7 +90,8 @@ function sigstr(doc) {
     return [b64utob(doc.data), doc.data_type, doc.encoding, doc.alg].map(btob64u).join('.');
 }
 
-function getPublicKey(key) {
+function getPublicKey(keyin) {
+    const key = keyin.value ? keyin.value : keyin;
     return /-----BEGIN RSA PRIVATE KEY-----/.test(key) ? forge.pki.publicKeyToPem(forge.pki.privateKeyFromPem(key))
 	: /^RSA\./.test(key) ? forge.pki.publicKeyToPem(magicToRSA(key))
 	: key;
