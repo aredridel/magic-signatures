@@ -156,3 +156,9 @@ tape.test('verify', t => {
   t.ok(result);
   t.end();
 });
+
+tape.test('pem to magic', t => {
+  const key = magic.RSAToMagic(GENKEY);
+  t.equal(key.indexOf(GENKEYM), 0);
+  t.end();
+});

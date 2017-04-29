@@ -10,7 +10,8 @@ module.exports = {
     sign,
     btob64u,
     b64utob,
-    magicToRSA
+    magicToRSA,
+    RSAToMagic
 }
 
 function verify(doc, key) {
@@ -48,6 +49,12 @@ function magicToRSA(key) {
     } else {
 	return forge.pki.setRsaPublicKey.apply(null, keyParts.map(e => b64utob(e).toString('hex')));
     }
+}
+
+function RSAToMagic(key) {
+    const rsa = /PRIVATE/.test(key) ? forge.pki.privateKeyFromPem(key) : forge.pki.publicKeyFromPem(key);
+    const parts = [rsa.n, rsa.e, rsa.d, rsa.p, rsa.q, rsa.dP, rsa.dQ, rsa.qInv].filter(e => !!e);
+    return ['RSA'].concat(parts.map(e => btob64u(new Buffer(pad(e.toString(16)), 'hex')))).join('.');
 }
 
 function sign(doc, key) {
@@ -136,4 +143,8 @@ function btob64u(buf) {
 	buf = new Buffer(buf);
     }
     return buf.toString('base64').replace(/\+/g, '-').replace(/\//g, '_');
+}
+
+function pad(x) {
+    return x.length % 2 == 0 ? x : "0" + x;
 }
