@@ -17,18 +17,21 @@ module.exports = {
 function verify(doc, key) {
     if (doc.encoding !=  'base64url') throw new Error(`Unsupported encoding '${doc.encoding}'`);
     const data = b64utob(doc.data);
-    const sig = doc.sigs.find(e => e.key_id == key.key_id);
+    const sigs = key.key_id ? doc.sigs : doc.sigs.filter(e => e.key_id == key.key_id);
 
-    if (!sig) throw new Error(`No signature found with key_id '${key.key_id}'`);
+    if (!sigs.length) throw new Error(`No signature found with key_id '${key.key_id}'`);
     if (doc.alg != 'RSA-SHA256') throw new Error(`Unsupported algorithm '${doc.alg}'`);
 
     const rsa = getPublicKey(key);
+    const signable = sigstr(doc);
 
-    const ver = crypto.createVerify('RSA-SHA256');
-    ver.update(sigstr(doc));
-    const verified = ver.verify(rsa, b64utob(sig.value));
+    const verified = sigs.filter(sig => {
+	const ver = crypto.createVerify('RSA-SHA256');
+	ver.update(signable);
+	return ver.verify(rsa, b64utob(sig.value));
+    });
 
-    if (verified) {
+    if (verified.length) {
 	return { data, data_type: doc.data_type };
     } else {
 	throw new Error("Bad signature");
