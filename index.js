@@ -1,12 +1,15 @@
 const ltx = require('ltx');
 const forge = require('node-forge');
 const crypto = require('crypto');
+const promisify = require("es6-promisify");
+const rsakeygen = promisify(require('rsa-json'));
 const MAGICNS = 'http://salmon-protocol.org/ns/magic-env';
 
 module.exports = {
     toXML,
     fromXML,
     verify,
+    generate,
     sign,
     btob64u,
     b64utob,
@@ -128,6 +131,13 @@ function fromXML(doc) {
             value: sig.getText()
         }))
     };
+}
+
+function generate(bits) {
+    return rsakeygen(bits).then(key => ({
+	public_key: RSAToMagic(key.public),
+	private_key: RSAToMagic(key.private),
+    }));
 }
 
 function toXML(env) {

@@ -18,8 +18,10 @@
   "homepage": "https://github.com/aredridel/magic-signatures#readme",
   "dependencies": {
     "asn1.js": "^4.9.1",
+    "es6-promisify": "^5.0.0",
     "ltx": "^2.7.1",
-    "node-forge": "^0.7.1"
+    "node-forge": "^0.7.1",
+    "rsa-json": "^0.2.0"
   },
   "eslintConfig": {
     "parserOptions": {

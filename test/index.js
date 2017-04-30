@@ -162,3 +162,16 @@ tape.test('pem to magic', t => {
   t.equal(key.indexOf(GENKEYM), 0);
   t.end();
 });
+
+tape.test('generate', t => {
+  const key = magic.generate(512);
+
+  key.then(key => {
+    t.ok(key.public_key);
+    t.ok(key.private_key);
+    t.equal(key.private_key.indexOf(key.public_key), 0);
+    t.ok(key.private_key.length > key.public_key.length);
+  })
+    .catch(err => t.error(err))
+    .then(() => t.end());
+});
