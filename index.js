@@ -17,7 +17,7 @@ module.exports = {
 function verify(doc, key) {
     if (doc.encoding !=  'base64url') throw new Error(`Unsupported encoding '${doc.encoding}'`);
     const data = b64utob(doc.data);
-    const sigs = key.key_id ? doc.sigs : doc.sigs.filter(e => e.key_id == key.key_id);
+    const sigs = key.key_id ? doc.sigs.filter(e => e.key_id == key.key_id) : doc.sigs;
 
     if (!sigs.length) throw new Error(`No signature found with key_id '${key.key_id}'`);
     if (doc.alg != 'RSA-SHA256') throw new Error(`Unsupported algorithm '${doc.alg}'`);
