@@ -16,6 +16,7 @@ module.exports = {
 
 function verify(doc, key) {
     if (doc.encoding !=  'base64url') throw new Error(`Unsupported encoding '${doc.encoding}'`);
+    if (!key) throw new Error(`Key must be provided`);
     const data = b64utob(doc.data);
     const sigs = key.key_id ? doc.sigs.filter(e => e.key_id == key.key_id) : doc.sigs;
 
