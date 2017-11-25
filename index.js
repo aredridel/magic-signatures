@@ -1,7 +1,7 @@
 const ltx = require('ltx');
 const forge = require('node-forge');
 const crypto = require('crypto');
-const promisify = require("es6-promisify");
+const promisify = require('util').promisify;
 const rsakeygen = promisify(require('rsa-json'));
 const MAGICNS = 'http://salmon-protocol.org/ns/magic-env';
 
